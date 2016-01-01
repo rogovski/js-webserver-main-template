@@ -1,23 +1,63 @@
-var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('./webpack.config')
+var express       = require('express'),
+    app           = express(),
+    http          = require('http'),
+    server        = http.Server(app),
+    chalk         = require('chalk'),
+    redis         = require('redis'),
+    createSession = require('./src/server/config/session'),
+    bodyParser    = require('body-parser'),
+    redisClient   = redis.createClient(),
+    path          = require('path'),
+    config        = require('./config.json'),
+    webroute      = require('./src/server/web');
 
-var app = new (require('express'))()
-var port = 3000
 
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
+/*
+ * setup web pack dev
+ */
+var webpack               = require('webpack'),
+    webpackDevMiddleware  = require('webpack-dev-middleware'),
+    webpackHotMiddleware  = require('webpack-hot-middleware'),
+    webpackConfig         = require('./webpack.config');
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + '/index.html')
-})
+var compiler = webpack(webpackConfig);
 
-app.listen(port, function(error) {
-  if (error) {
-    console.error(error)
-  } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
-  }
-})
+app.use(webpackDevMiddleware(compiler, { 
+  noInfo: true, 
+  publicPath: webpackConfig.output.publicPath 
+}));
+app.use(webpackHotMiddleware(compiler));
+
+
+/*
+ * setup redis as session store
+ */
+app.use(createSession(redisClient, config));
+
+
+/*
+ * setup body parser middleware
+ */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+/*
+ * use ejs as template engine
+ */
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src/server/views'));
+
+
+/*
+ * setup web routes
+ */
+app.use('/', webroute);
+
+
+/*
+ * start server
+ */
+server.listen(config.port, function () {
+  console.log(chalk.green('==> 🌎 running on http://localhost:' + config.port));
+});
