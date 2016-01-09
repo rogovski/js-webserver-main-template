@@ -13,3 +13,5 @@ global.textBlockRequire = function() {
 require('./common/validation/object');
 require('./common/crypto/uuid');
 require('./common/crypto/hash');
+
+require('./data/model/base');

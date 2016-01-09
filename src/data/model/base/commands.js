@@ -1,3 +1,32 @@
+var uuid = commonRequire('crypto/uuid');
+
+
+/*
+ * BASE COMMAND OBJECT
+ */
+function COMMAND(options) {
+  var _options = options || {};
+
+  /*
+   * command id
+   */
+  Object.defineProperty(this, 'commandId', {
+    enumerable: true,
+    configurable: false,
+    writable: false,
+    value: _options.commandId || uuid.v4()
+  });
+
+  /*
+   * command timestamp
+   */
+  Object.defineProperty(this, 'timestamp', {
+    enumerable: true,
+    configurable: false,
+    writable: false,
+    value: _options.timestamp || Date.now()    
+  });
+}
 
 
 /*
@@ -5,10 +34,21 @@
  */
 function SCHEMA_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'SCHEMA_REQUESTED';
-  this.eventId = _options.eventId || null;
-  this.correlationId = _options.correlationId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'SCHEMA_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.SCHEMA_REQUESTED = SCHEMA_REQUESTED;
+SCHEMA_REQUESTED.prototype = Object.create(COMMAND.prototype);
+SCHEMA_REQUESTED.prototype.constructor = SCHEMA_REQUESTED;
+
+
+/*
+ * EXPORTS
+ */
+module.exports = {
+  COMMAND: COMMAND,
+  SCHEMA_REQUESTED: SCHEMA_REQUESTED
+};

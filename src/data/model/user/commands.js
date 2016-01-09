@@ -1,15 +1,19 @@
+var COMMAND = dataRequire('model/base/commands').COMMAND;
 
 /*
  * CREATES
  */
 function USER_CREATE_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_CREATE_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_CREATE_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_CREATE_REQUESTED = USER_CREATE_REQUESTED;
+USER_CREATE_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_CREATE_REQUESTED.prototype.constructor = USER_CREATE_REQUESTED;
 
 
 /*
@@ -17,12 +21,15 @@ exports.USER_CREATE_REQUESTED = USER_CREATE_REQUESTED;
  */
 function USER_UPDATE_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_UPDATE_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_UPDATE_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_UPDATE_REQUESTED = USER_UPDATE_REQUESTED;
+USER_UPDATE_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_UPDATE_REQUESTED.prototype.constructor = USER_UPDATE_REQUESTED;
 
 
 /*
@@ -30,12 +37,15 @@ exports.USER_UPDATE_REQUESTED = USER_UPDATE_REQUESTED;
  */
 function USER_DELETE_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_DELETE_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_DELETE_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_DELETE_REQUESTED = USER_DELETE_REQUESTED;
+USER_DELETE_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_DELETE_REQUESTED.prototype.constructor = USER_DELETE_REQUESTED;
 
 
 /*
@@ -43,12 +53,15 @@ exports.USER_DELETE_REQUESTED = USER_DELETE_REQUESTED;
  */
 function USER_READ_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_READ_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_READ_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_READ_REQUESTED = USER_READ_REQUESTED;
+USER_READ_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_READ_REQUESTED.prototype.constructor = USER_READ_REQUESTED;
 
 
 /*
@@ -56,12 +69,15 @@ exports.USER_READ_REQUESTED = USER_READ_REQUESTED;
  */
 function USER_SAFEREAD_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_SAFEREAD_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_SAFEREAD_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_SAFEREAD_REQUESTED = USER_SAFEREAD_REQUESTED;
+USER_SAFEREAD_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_SAFEREAD_REQUESTED.prototype.constructor = USER_SAFEREAD_REQUESTED;
 
 
 /*
@@ -69,12 +85,15 @@ exports.USER_SAFEREAD_REQUESTED = USER_SAFEREAD_REQUESTED;
  */
 function USER_PASSWORD_RESET_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_PASSWORD_RESET_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_PASSWORD_RESET_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_PASSWORD_RESET_REQUESTED = USER_PASSWORD_RESET_REQUESTED;
+USER_PASSWORD_RESET_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_PASSWORD_RESET_REQUESTED.prototype.constructor = USER_PASSWORD_RESET_REQUESTED;
 
 
 /*
@@ -82,10 +101,26 @@ exports.USER_PASSWORD_RESET_REQUESTED = USER_PASSWORD_RESET_REQUESTED;
  */
 function USER_VALIDATION_REQUESTED(options) {
   var _options = options || {};
-  this.type = 'USER_VALIDATION_REQUESTED';
-  this.commandId = _options.commandId || null;
-  this.timestamp = _options.timestamp || null;
+
+  COMMAND.call(this, _options);
+
+  this.commandType = 'USER_VALIDATION_REQUESTED';
+
   this.data = _options.data || null;
 }
-exports.USER_VALIDATION_REQUESTED = USER_VALIDATION_REQUESTED;
+USER_VALIDATION_REQUESTED.prototype = Object.create(COMMAND.prototype);
+USER_VALIDATION_REQUESTED.prototype.constructor = USER_VALIDATION_REQUESTED;
 
+
+/*
+ * EXPORTS
+ */
+module.exports = {
+  USER_CREATE_REQUESTED: USER_CREATE_REQUESTED,
+  USER_UPDATE_REQUESTED: USER_UPDATE_REQUESTED,
+  USER_DELETE_REQUESTED: USER_DELETE_REQUESTED,
+  USER_READ_REQUESTED: USER_READ_REQUESTED,
+  USER_SAFEREAD_REQUESTED: USER_SAFEREAD_REQUESTED,
+  USER_PASSWORD_RESET_REQUESTED: USER_PASSWORD_RESET_REQUESTED,
+  USER_VALIDATION_REQUESTED: USER_VALIDATION_REQUESTED
+};

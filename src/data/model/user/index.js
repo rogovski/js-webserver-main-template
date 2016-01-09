@@ -69,11 +69,13 @@ function userCreateRequested(user, command) {
     })
     .then(function (result) {
       return new events.USER_CREATE_SUCCEEDED({
+        correlationId: command.commandId,
         data: result
       });
     })
     .catch(function (e) {
       return new events.USER_CREATE_FAILED({
+        correlationId: command.commandId,
         data: e
       });
     });
@@ -100,11 +102,13 @@ function userReadRequested(user, command) {
     .findAndCountAll(command.data)
     .then(function (queryRes) {
       return new events.USER_READ_SUCCEEDED({
+        correlationId: command.commandId,
         data: queryRes
       });
     })
     .catch(function (e) {
       return new events.USER_READ_FAILED({
+        correlationId: command.commandId,
         data: e
       });
     });
@@ -122,6 +126,7 @@ function userSafeReadRequested(user, command) {
     .findAndCountAll(command.data)
     .then(function (queryRes) {
       return new events.USER_SAFEREAD_SUCCEEDED({
+        correlationId: command.commandId,
         data: {
           count: queryRes.count,
           rows:  _.map(queryRes.rows, function (u) {
@@ -132,6 +137,7 @@ function userSafeReadRequested(user, command) {
     })
     .catch(function (e) {
       return new events.USER_SAFEREAD_FAILED({
+        correlationId: command.commandId,
         data: e
       });
     });
@@ -168,17 +174,20 @@ function userValidationRequested(user, command) {
     .then(function (isValid) {
       if(isValid) {
         return new events.USER_VALIDATION_SUCCEEDED({
+          correlationId: command.commandId,
           data: isValid
         });        
       }
       else {
         return new events.USER_VALIDATION_FAILED({
+          correlationId: command.commandId,
           data: isValid
         });
       }
     })
     .catch(function (e) {
       return new events.USER_VALIDATION_FAILED({
+        correlationId: command.commandId,
         data: e
       });
     });  
@@ -189,7 +198,7 @@ function userValidationRequested(user, command) {
  * apply a single command to a user object
  */
 function apply(user, command) {
-  switch(command.type) {
+  switch(command.commandType) {
 
     case 'USER_CREATE_REQUESTED':
       return userCreateRequested(user, command);
