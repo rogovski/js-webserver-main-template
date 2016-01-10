@@ -1,3 +1,5 @@
+require('./global');
+
 var express       = require('express'),
     app           = express(),
     http          = require('http'),
@@ -9,7 +11,7 @@ var express       = require('express'),
     redisClient   = redis.createClient(),
     path          = require('path'),
     config        = require('./config.json'),
-    webroute      = require('./src/server/web');
+    routes        = require('./src/server');
 
 
 /*
@@ -50,9 +52,23 @@ app.set('views', path.join(__dirname, 'src/server/views'));
 
 
 /*
- * setup web routes
+ * root routes
  */
-app.use('/', webroute);
+app.use('/', routes.root);
+
+
+/*
+ * web routes
+ */
+app.use('/authenticate', routes.web.authenticate.router);
+app.use('/user', routes.web.user.router);
+
+
+/*
+ * api routes
+ */
+app.use('/api/authenticate', routes.api.authenticate.router);
+app.use('/api/user', routes.api.user.router);
 
 
 /*

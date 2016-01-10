@@ -4,10 +4,10 @@ var express = require('express'),
     site    = require('./site_export');
 
 /*
- * OPTIONS /api/user
+ * OPTIONS /user
  */
 router.options('/', function (req, res) {
-  var options = site['/api/user'];
+  var options = site['/user'];
 
   res.set({
     'Content-Type': 'application/json',
@@ -18,10 +18,9 @@ router.options('/', function (req, res) {
 
 
 /*
- * GET /api/user
+ * GET /user
  */
 router.get('/', function (req, res) {
-  console.log(req);
   res.status(501).send('not implemented');
 });
 
