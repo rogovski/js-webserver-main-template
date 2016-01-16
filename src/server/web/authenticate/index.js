@@ -1,20 +1,13 @@
 var express = require('express'),
     router  = express.Router(),
     _       = require('lodash'),
-    site    = require('./site_export.json');
+    site    = require('./site_export.json'),
+    options = serverRequire('middleware').options;
 
 /*
  * OPTIONS /authenticate
  */
-router.options('/', function (req, res) {
-  var options = site['/authenticate'];
-
-  res.set({
-    'Content-Type': 'application/json',
-    'Allow': _.keys(options.methods).join(', ')
-  });
-  res.status(200).send(options);
-});
+router.options('/', options(site));
 
 
 /*
@@ -42,15 +35,7 @@ router.post('/', function (req, res) {
 /*
  * OPTIONS /authenticate/logout
  */
-router.options('/logout', function (req, res) {
-  var options = site['/logout'];
-
-  res.set({
-    'Content-Type': 'application/json',
-    'Allow': _.keys(options.methods).join(', ')
-  });
-  res.status(200).send(options);
-});
+router.options('/logout', options(site));
 
 
 /*

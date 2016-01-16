@@ -11,7 +11,7 @@ module.exports = function (site) {
       key = '/';
     }
 
-    var options = site[key];
+    var options = site.routes[key];
 
     res.set({
       'Content-Type': 'application/json',

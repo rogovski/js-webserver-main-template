@@ -1,0 +1,68 @@
+{
+  "routes": {
+    "/": {
+      "resource": "/",
+      "description": "root route for web requests",
+      "context": "web",
+      "srcpath": [],
+      "methods": {
+        "OPTIONS": {
+          "description": "options for root route of web requests",
+          "content-type": [
+            "application/json",
+            "text/xml",
+            "text/html"
+          ] 
+        },
+        "GET": {
+          "description": "get index page of web app. redirects to login if not logged in",
+          "content-type": [
+            "text/html"
+          ]
+        }
+      },
+      "children": [
+        "/authenticate",
+        "/authenticate/logout",
+        "/user"
+      ]
+    },
+    "/api": {
+      "resource": "/api",
+      "description": "root route for api requests",
+      "context": "api",
+      "srcpath": [],
+      "methods": {
+        "OPTIONS": {
+          "description": "options for root route of api requests",
+          "content-type": [
+            "application/json",
+            "text/xml",
+            "text/html"
+          ] 
+        }
+      },
+      "children": [
+        "/api/authenticate",
+        "/api/user"
+      ]
+    }
+  },
+  "index": {
+    "params": [],
+    "exports": [
+      {
+        "name": "root",
+        "isReExport": false
+      },
+      {
+        "name": "api",
+        "isReExport": true
+      },
+      {
+        "name": "web",
+        "isReExport": true
+      }
+    ]
+  }
+}

@@ -1,8 +1,16 @@
 <html>
 <head>
-    <title></title>
+  <title>index</title>
 </head>
 <body>
+  <form method="post" action="/authenticate">
+      <input type="text" name="user[email]">
+      <input type="password" name="user[password]">
+      <input type="submit" value="Submit">
+  </form>
+  
+  <div id="app"></div>
 
+  <script src="js/bundle.js"></script>
 </body>
 </html>

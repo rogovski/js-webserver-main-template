@@ -1,7 +1,12 @@
-import React from 'react'
-import { render } from 'react-dom'
+var React    = require('react'),
+    ReactDom = require('react-dom');
 
-render(
-  <p>ok react</p>,
+window.React = React;
+
+console.log('ok');
+/*
+ReactDom.render(
+  (<p>ok react</p>),
   document.getElementById('app')
-)
+);
+*/
