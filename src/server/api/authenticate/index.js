@@ -1,7 +1,7 @@
 var express = require('express'),
     router  = express.Router(),
     _       = require('lodash'),
-    site    = require('./site_export.json'),
+    site    = require('./export.json'),
     options = serverRequire('middleware').options;
 
 /*
