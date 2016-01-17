@@ -4,7 +4,6 @@
       "resource": "/api/user",
       "description": "system users",
       "context": "api",
-      "srcpath": ["user"],
       "methods": {
         "OPTIONS": {
           "description": "options for user route of api requests",
@@ -23,6 +22,11 @@
     }
   },
   "index": {
-
+    "exports": [
+      {
+        "name": "router",
+        "isReExport": false
+      }
+    ]
   }
 }

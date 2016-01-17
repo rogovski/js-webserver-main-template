@@ -23,6 +23,5 @@ router.post('/', function (req, res) {
  * EXPORTS
  */
 module.exports = {
-  site: site,
   router: router
 };

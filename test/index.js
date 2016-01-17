@@ -15,3 +15,5 @@ require('./common/crypto/uuid');
 require('./common/crypto/hash');
 
 require('./data/model/base');
+
+require('./server');

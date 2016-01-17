@@ -7,12 +7,12 @@
       {
         "name": "authenticate",
         "isReExport": true,
-        "exportPath": ["web", "authenticate"]
+        "exportPath": ["api", "authenticate"]
       },
       {
         "name": "user",
         "isReExport": true,
-        "exportPath": ["web", "user"]
+        "exportPath": ["api", "user"]
       }
     ]
   }

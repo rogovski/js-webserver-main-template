@@ -4,7 +4,6 @@
       "resource": "/",
       "description": "root route for web requests",
       "context": "web",
-      "srcpath": [],
       "methods": {
         "OPTIONS": {
           "description": "options for root route of web requests",
@@ -31,7 +30,6 @@
       "resource": "/api",
       "description": "root route for api requests",
       "context": "api",
-      "srcpath": [],
       "methods": {
         "OPTIONS": {
           "description": "options for root route of api requests",
@@ -49,7 +47,6 @@
     }
   },
   "index": {
-    "params": [],
     "exports": [
       {
         "name": "root",
@@ -57,11 +54,13 @@
       },
       {
         "name": "api",
-        "isReExport": true
+        "isReExport": true,
+        "exportPath": ["api"]
       },
       {
         "name": "web",
-        "isReExport": true
+        "isReExport": true,
+        "exportPath": ["web"]
       }
     ]
   }

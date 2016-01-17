@@ -4,7 +4,6 @@
       "resource": "/user",
       "description": "system users",
       "context": "web",
-      "srcpath": ["user"],
       "methods": {
         "OPTIONS": {
           "description": "options for user route of web requests",
@@ -24,7 +23,12 @@
     }    
   },
   "index": {
-    
+    "exports": [
+      {
+        "name": "router",
+        "isReExport": false
+      }
+    ]    
   }
 
 }

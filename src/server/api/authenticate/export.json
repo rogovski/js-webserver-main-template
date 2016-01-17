@@ -4,7 +4,6 @@
       "resource": "/api/authenticate",
       "description": "authentication route for api requests",
       "context": "api",
-      "srcpath": ["authenticate"],
       "methods": {
         "OPTIONS": {
           "description": "options for authentication route of api requests",
@@ -26,7 +25,12 @@
     }
   },
   "index": {
-    
+    "exports": [
+      {
+        "name": "router",
+        "isReExport": false
+      }
+    ]    
   }
 
 }

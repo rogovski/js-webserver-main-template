@@ -3,7 +3,7 @@
 var express = require('express'),
     router  = express.Router(),
     _       = require('lodash'),
-    site    = require('./site_export.json'),
+    site    = require('./export.json'),
     api     = require('./api'),
     web     = require('./web'),
     options = serverRequire('middleware').options;
@@ -39,7 +39,6 @@ router.options('/api', options(site));
  */
 module.exports = {
   root: router,
-  site: site,
   api: api,
   web: web
 };
